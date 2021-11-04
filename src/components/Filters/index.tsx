@@ -67,11 +67,13 @@ const Filters: React.FC<FilterProps> = ({ children, resource, filteredInhabitant
       filterParams: updatedParams,
       inhabitants
     });
+    setFilterParams(updatedParams);
     setFilteredInhabitants(result);
   };
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
+
       const result = searchResult({ filterParams, inhabitants });
       setFilteredInhabitants(result);
     }
