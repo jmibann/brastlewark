@@ -1,4 +1,8 @@
-import { ProfessionRecordType, InhabitantType } from '../types';
+import {
+  ProfessionRecordType,
+  InhabitantType,
+  SearchResultType,
+} from '../types';
 
 export function createResource<T>(promise: Promise<T>): {
   read: () => T | Promise<T>
@@ -51,5 +55,38 @@ export const getProfessionOptions = (inhabitants: InhabitantType[]) => {
     }
   );
 
-  return Object.keys(options);
-}
+  return Object.keys(options).sort();
+};
+
+export const filterByAge = (age: number, inhabitants: InhabitantType[]) =>
+  inhabitants.filter((gnome) => age === gnome.age);
+
+export const filterByName = (name: string, inhabitants: InhabitantType[]) =>
+  inhabitants.filter((gnome) => gnome?.name?.toLowerCase().includes(name.toLowerCase()));
+
+export const filterByProfession = (profession: string, inhabitants: InhabitantType[]) =>
+  inhabitants.filter((gnome) => {
+    let isFound = gnome?.professions?.find(prof => prof.includes(profession));
+    return Boolean(isFound);
+  });
+
+
+export const searchResult = ({ filterParams, inhabitants }: SearchResultType) => {
+  const { age, name, profession } = filterParams;
+
+  const byAge = Boolean(age);
+  const byName = Boolean(name.length);
+  const byProfession = Boolean(profession.length);
+
+  const isSearchingBy = byName || byProfession || byAge;
+
+  let searchResult = [...inhabitants];
+
+  if (isSearchingBy) {
+    if (byAge) searchResult = [...filterByAge(Number(age), searchResult)];
+    if (byName) searchResult = [...filterByName(name, searchResult)];
+    if (byProfession) searchResult = [...filterByProfession(profession, searchResult)];
+  }
+
+  return [...searchResult];
+};

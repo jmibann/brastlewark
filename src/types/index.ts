@@ -12,8 +12,13 @@ export type InhabitantType = {
 
 export type ProfessionRecordType = Record<string, string>
 
-export type FilterType = {
+export type FilterParamsType = {
   age: number;
   name: string;
   profession: string;
+}
+
+export type SearchResultType = {
+  filterParams: FilterParamsType;
+  inhabitants: InhabitantType[];
 }
