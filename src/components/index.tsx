@@ -1,13 +1,19 @@
-import Card from './Card';
-import CardsBoard from './CardsBoard';
+import AvatarCell from './AvatarCell';
 import Input from './Input';
 import Filters from './Filters';
+import PageButton from './PageButton';
+import Pagination from './Pagination';
+import Pill from './Pill';
 import Select from './Select';
+import Table from './Table';
 
 export {
-  Card,
-  CardsBoard,
+  AvatarCell,
   Input,
   Filters,
-  Select
+  PageButton,
+  Pagination,
+  Pill,
+  Select,
+  Table,
 };
