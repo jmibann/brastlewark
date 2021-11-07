@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import { InhabitantType } from '../../types';
+import { InhabitantType, SearchResourceType } from '../../types';
 import { useTable, usePagination } from 'react-table';
 
 import { Pagination } from '../../components';
@@ -8,11 +8,14 @@ import TableBody from './TableBody';
 import TableHeader from './TableHeader';
 
 type TableProps = {
-  data: InhabitantType[];
+  searchResource: SearchResourceType;
   columns: any;
 }
 
-const Table: React.FC<TableProps> = ({ columns, data }) => {
+const Table: React.FC<TableProps> = ({ columns, searchResource }) => {
+
+  const data = searchResource.read() as InhabitantType[];
+
   const {
     getTableProps,
     getTableBodyProps,

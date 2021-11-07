@@ -10,16 +10,17 @@ import {
   Spinner,
 } from './components';
 
-import { InhabitantType } from './types'
+import { SearchResourceType } from './types'
 import { createResource } from './utils';
 import { getInhabitants } from './services';
+
 
 const createInhabitantsResource = () => createResource(getInhabitants());
 
 const inhabitantsResource = createInhabitantsResource();
 
 function App() {
-  const [filteredInhabitants, setFilteredInhabitants] = useState<InhabitantType[]>([]);
+  const [searchResource, setSearchResource] = useState<SearchResourceType>(inhabitantsResource);
 
   const columns = React.useMemo(
     () => [
@@ -63,13 +64,14 @@ function App() {
       </span>
       <Suspense fallback={<Spinner />}>
         <Filters
-          resource={inhabitantsResource}
-          filteredInhabitants={filteredInhabitants}
-          setFilteredInhabitants={setFilteredInhabitants}
+          inhabitantsResource={inhabitantsResource}
+          setSearchResource={setSearchResource}
         />
-        <Table columns={columns} data={filteredInhabitants} />
       </Suspense>
 
+      <Suspense fallback={<Spinner />}>
+        <Table columns={columns} searchResource={searchResource} />
+      </Suspense>
     </div>
   );
 }

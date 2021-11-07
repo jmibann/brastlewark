@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 
 import { Input, Select } from '../../components';
 
-import { InhabitantType, FilterParamsType } from '../../types'
-import { getProfessionOptions, searchResult } from '../../utils';
+import { InhabitantType, FilterParamsType, SearchResourceType } from '../../types'
+import { createResource, getProfessionOptions } from '../../utils';
+import { searchInhabitants } from '../../services';
 
 type FilterProps = {
-  filteredInhabitants: InhabitantType[];
-  setFilteredInhabitants: React.Dispatch<React.SetStateAction<InhabitantType[]>>;
-  resource: {
+  setSearchResource: React.Dispatch<SearchResourceType>;
+  inhabitantsResource: {
     read: () => InhabitantType[] | Promise<InhabitantType[]>;
   }
 };
@@ -19,8 +19,11 @@ const initialFilterValues: FilterParamsType = {
   profession: 'initialValue',
 }
 
-const Filters: React.FC<FilterProps> = ({ children, resource, filteredInhabitants, setFilteredInhabitants }) => {
-  const inhabitants = resource.read() as InhabitantType[];
+const createSearchResource =
+  (filterParams: FilterParamsType) => createResource(searchInhabitants(filterParams));
+
+const Filters: React.FC<FilterProps> = ({ inhabitantsResource, setSearchResource }) => {
+  const inhabitants = inhabitantsResource.read() as InhabitantType[];
 
   const [professionOptions, setProfessionOptions] = useState<string[]>([]);
   const [filterParams, setFilterParams] = useState<FilterParamsType>(initialFilterValues);
@@ -28,10 +31,6 @@ const Filters: React.FC<FilterProps> = ({ children, resource, filteredInhabitant
   useEffect(() => {
     setProfessionOptions(getProfessionOptions(inhabitants));
   }, [inhabitants])
-
-  useEffect(() => {
-    setFilteredInhabitants(inhabitants);
-  }, [inhabitants, setFilteredInhabitants])
 
   const { age, name, profession } = filterParams;
 
@@ -63,19 +62,13 @@ const Filters: React.FC<FilterProps> = ({ children, resource, filteredInhabitant
 
     const updatedParams = { ...filterParams, profession }
 
-    const result = searchResult({
-      filterParams: updatedParams,
-      inhabitants
-    });
     setFilterParams(updatedParams);
-    setFilteredInhabitants(result);
+    setSearchResource(createSearchResource(updatedParams));
   };
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-
-      const result = searchResult({ filterParams, inhabitants });
-      setFilteredInhabitants(result);
+      setSearchResource(createSearchResource(filterParams));
     }
   };
 

@@ -22,3 +22,7 @@ export type SearchResultType = {
   filterParams: FilterParamsType;
   inhabitants: InhabitantType[];
 }
+
+export type SearchResourceType = {
+  read: () => InhabitantType[] | Promise<InhabitantType[]>;
+}
