@@ -36,7 +36,7 @@ const Pagination: React.FC<PaginationProps> = ({
   setPageSize,
 }) => {
   return (
-    < div className="pagination w-full my-2 hidden sm:flex-1 sm:flex sm:items-center sm:justify-between" >
+    < div className="pagination flex w-full justify-between my-2 sm:flex-1 sm:items-center" >
       <nav className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
         <PageButton
           className="rounded-l-md"

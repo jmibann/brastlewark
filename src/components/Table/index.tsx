@@ -36,7 +36,7 @@ const Table: React.FC<TableProps> = ({ columns, data }) => {
 
   return (
     <>
-      <div className="w-full flex flex-col py-2 align-middle shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+      <div className="w-full flex flex-col my-2 align-middle shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
         <table {...getTableProps()} className="min-w-full divide-y divide-gray-200">
           <TableHeader headerGroups={headerGroups} />
           <TableBody page={page} getTableBodyProps={getTableBodyProps} prepareRow={prepareRow} />

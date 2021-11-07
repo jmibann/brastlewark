@@ -80,7 +80,7 @@ const Filters: React.FC<FilterProps> = ({ children, resource, filteredInhabitant
   };
 
   return (
-    <div className="flex flex-row w-full h-12 justify-around items-center bg-pink-500">
+    <div className="flex flex-col justify-around items-center sm:flex-row w-full sm:h-12 mb-4">
       <Input
         name="name"
         value={name}

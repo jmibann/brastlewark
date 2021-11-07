@@ -13,7 +13,7 @@ const Input: React.FC<InputType> = ({ name, value, placeholder, onChange, onKeyD
     <input
       name={name}
       value={value}
-      className="rounded px-2 py-1"
+      className="rounded w-1/2 sm:w-1/4 px-2 py-1 border mb-2 sm:mb-0"
       placeholder={`Search by ${placeholder}...`}
       onChange={onChange}
       onKeyDown={onKeyDown}

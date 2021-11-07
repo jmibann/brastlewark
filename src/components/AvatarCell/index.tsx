@@ -7,13 +7,13 @@ type AvatarCellProps = {
 }
 
 const AvatarCell: React.FC<AvatarCellProps> = ({ value, column, row }) => (
-  <div className="flex items-center self-start ml-4">
-    <div className="flex-shrink-0 h-12 w-12">
+  <div className="flex flex-col justify-center items-center sm:ml-4 sm:flex-row sm:self-start ">
+    <div className="flex flex-shrink-0 h-12 w-12">
       <img className="h-12 w-12 rounded-full" src={row.original[column.imgAccessor]} alt="" />
     </div>
-    <div className="ml-4">
-      <div className="text-sm font-medium text-gray-900">{value}</div>
-      <div className="text-sm text-gray-500">{row.original[column.ageAccessor]}</div>
+    <div className="flex flex-col justify-center sm:ml-4 sm:justify-start sm:items-start">
+      <div className="text-sm font-medium text-gray-900 text-center sm:text-start">{value}</div>
+      <div className="text-sm text-gray-500 text-center sm:text-start">{row.original[column.ageAccessor]}</div>
     </div>
   </div>
 );
