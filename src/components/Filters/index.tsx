@@ -16,7 +16,7 @@ type FilterProps = {
 const initialFilterValues: FilterParamsType = {
   age: 0,
   name: '',
-  profession: '',
+  profession: 'initialValue',
 }
 
 const Filters: React.FC<FilterProps> = ({ children, resource, filteredInhabitants, setFilteredInhabitants }) => {
@@ -33,7 +33,7 @@ const Filters: React.FC<FilterProps> = ({ children, resource, filteredInhabitant
     setFilteredInhabitants(inhabitants);
   }, [inhabitants, setFilteredInhabitants])
 
-  const { age, name } = filterParams;
+  const { age, name, profession } = filterParams;
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
@@ -95,7 +95,7 @@ const Filters: React.FC<FilterProps> = ({ children, resource, filteredInhabitant
         onChange={handleAge}
         onKeyDown={handleKeyPress}
       />
-      <Select options={professionOptions} onChange={handleSelectChange} />
+      <Select options={professionOptions} onChange={handleSelectChange} value={profession} />
     </div>
   )
 };

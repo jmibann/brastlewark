@@ -7,6 +7,7 @@ import {
   PhisicalDescription,
   ProfessionsList,
   Table,
+  Spinner,
 } from './components';
 
 import { InhabitantType } from './types'
@@ -28,12 +29,12 @@ function App() {
         accessor: 'name',
         Cell: AvatarCell,
         imgAccessor: "thumbnail",
-        ageAccessor: "age",
       },
       {
         Header: () =>
           <div className="flex w-full">Description</div>,
         accessor: 'hair_color',
+        ageAccessor: "age",
         heightAccessor: 'height',
         weightAccessor: 'weight',
         Cell: (props: any) =>
@@ -56,12 +57,11 @@ function App() {
   )
 
   return (
-    <div className="container my-12 mx-auto px-4 md:px-12 flex flex-col items-center">
+    <div className="container flex flex-col items-center my-12 mx-auto px-4 md:px-12">
       <span className="text-3xl font-sans text-blue-700 text-opacity-90 mb-12 text-center">
         Welcome to Brastlewark Town Census Data
       </span>
-
-      <Suspense fallback={<div>Loading Inhabitants</div>}>
+      <Suspense fallback={<Spinner />}>
         <Filters
           resource={inhabitantsResource}
           filteredInhabitants={filteredInhabitants}
@@ -69,6 +69,7 @@ function App() {
         />
         <Table columns={columns} data={filteredInhabitants} />
       </Suspense>
+
     </div>
   );
 }

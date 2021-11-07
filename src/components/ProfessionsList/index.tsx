@@ -7,9 +7,18 @@ type ProfessionsListProps = {
 }
 
 const ProfessionsList: React.FC<ProfessionsListProps> = ({ professions }) => {
+  const noProfessionFound = !Boolean(professions?.length);
+
+  if (noProfessionFound) {
+    return (
+      <span className="text-sm font-medium text-gray-400 text-center sm:text-start">
+        No profession found
+      </span>)
+  }
+
   return (
     <div className="w-full flex flex-wrap">
-      {professions?.map((prof: string) => <Pill value={prof} />)}
+      {professions?.map((prof: string, idx) => <Pill key={`prof-${idx}`} value={prof} />)}
     </div>
   )
 }

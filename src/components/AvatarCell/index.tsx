@@ -13,7 +13,6 @@ const AvatarCell: React.FC<AvatarCellProps> = ({ value, column, row }) => (
     </div>
     <div className="flex flex-col justify-center sm:ml-4 sm:justify-start sm:items-start">
       <div className="text-sm font-medium text-gray-900 text-center sm:text-start">{value}</div>
-      <div className="text-sm text-gray-500 text-center sm:text-start">{row.original[column.ageAccessor]}</div>
     </div>
   </div>
 );

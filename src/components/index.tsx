@@ -8,6 +8,7 @@ import Pill from './Pill';
 import PhisicalDescription from './PhisicalDescription';
 import ProfessionsList from './ProfessionsList'
 import Select from './Select';
+import Spinner from './Spinner';
 import Table from './Table';
 
 export {
@@ -21,5 +22,6 @@ export {
   ProfessionsList,
   Pill,
   Select,
+  Spinner,
   Table,
 };
