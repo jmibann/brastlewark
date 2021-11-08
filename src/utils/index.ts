@@ -1,9 +1,5 @@
-import React from 'react';
-
 import {
-  CacheType,
   InhabitantType,
-  UpdateCacheType,
   SearchResultType,
   ProfessionRecordType,
 } from '../types';
@@ -95,3 +91,15 @@ export const searchResult = ({ filterParams, inhabitants }: SearchResultType) =>
 
   return [...searchResult];
 };
+
+export const LOADING_DATA_TABLE = Array.from({ length: 10 }, (_, i) => ({
+  id: i + 1,
+  age: undefined,
+  name: undefined,
+  height: undefined,
+  weight: undefined,
+  friends: undefined,
+  thumbnail: undefined,
+  hair_color: undefined,
+  professions: undefined,
+}));

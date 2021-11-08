@@ -1,4 +1,4 @@
-import React, { Suspense, useState, useRef } from 'react';
+import React, { Suspense, useState } from 'react';
 
 import {
   AvatarCell,
@@ -10,8 +10,8 @@ import {
   Spinner,
 } from './components';
 
-import { SearchResourceType, CacheType } from './types'
-import { createResource } from './utils';
+import { SearchResourceType } from './types'
+import { createResource, LOADING_DATA_TABLE } from './utils';
 import { getInhabitants } from './services';
 
 
@@ -19,9 +19,36 @@ const createInhabitantsResource = () => createResource(getInhabitants());
 
 const inhabitantsResource = createInhabitantsResource();
 
+const LOADING_TABLE_COL = [
+  {
+    Header: () =>
+      <div className="flex w-full">Name</div>,
+    Cell: (props) => <AvatarCell {...props} isLoading />,
+    accessor: 'hair_color',
+  },
+  {
+    accessor: 'age',
+    Header: () =>
+      <div className="flex w-full">Description</div>,
+    Cell: (props) =>
+      <PhisicalDescription {...props} isLoading />,
+  },
+  {
+    accessor: 'friends',
+    Header: 'Professions',
+    Cell: (props) =>
+      <ProfessionsList  {...props} isLoading />
+  },
+  {
+    accessor: 'height',
+    Header: 'Friends',
+    Cell: (props) =>
+      <FriendsList  {...props} isLoading />
+  },
+];
+
 function App() {
   const [searchResource, setSearchResource] = useState<SearchResourceType>(inhabitantsResource);
-  const imgCache = useRef<CacheType>({});
 
   const columns = React.useMemo(
     () => [
@@ -29,7 +56,7 @@ function App() {
         Header: () =>
           <div className="flex w-full">Name</div>,
         accessor: 'name',
-        Cell: (props: any) => <AvatarCell {...props} imgCache={imgCache} />,
+        Cell: AvatarCell,
         imgAccessor: "thumbnail",
       },
       {
@@ -45,13 +72,13 @@ function App() {
       {
         Header: 'Professions',
         accessor: 'professions',
-        Cell: (props: any) =>
+        Cell: (props) =>
           <ProfessionsList professions={props?.cell?.value} />
       },
       {
         Header: 'Friends',
         accessor: 'friends',
-        Cell: (props: any) =>
+        Cell: (props) =>
           <FriendsList friends={props?.cell?.value} />
       },
     ],
@@ -64,14 +91,17 @@ function App() {
         Welcome to Brastlewark Town Census Data
       </span>
       <Suspense fallback={<Spinner />}>
-        <Filters
-          imgCache={imgCache}
-          inhabitantsResource={inhabitantsResource}
-          setSearchResource={setSearchResource}
-        />
+        <Filters inhabitantsResource={inhabitantsResource} setSearchResource={setSearchResource} />
       </Suspense>
-      {console.log('=============> udpatedCache: ', imgCache)}
-      <Suspense fallback={<Spinner />}>
+
+      <Suspense
+        fallback={<Table
+          columns={LOADING_TABLE_COL}
+          searchResource={
+            { read: () => LOADING_DATA_TABLE, } as SearchResourceType
+          }
+        />}
+      >
         <Table columns={columns} searchResource={searchResource} />
       </Suspense>
     </div>

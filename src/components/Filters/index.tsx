@@ -6,14 +6,11 @@ import {
   InhabitantType,
   FilterParamsType,
   SearchResourceType,
-  CacheType,
-  UpdateCacheType,
 } from '../../types'
 import { createResource, getProfessionOptions } from '../../utils';
 import { searchInhabitants } from '../../services';
 
 type FilterProps = {
-  imgCache: React.MutableRefObject<CacheType>;
   setSearchResource: React.Dispatch<SearchResourceType>;
   inhabitantsResource: {
     read: () => InhabitantType[] | Promise<InhabitantType[]>;
@@ -29,31 +26,13 @@ const initialFilterValues: FilterParamsType = {
 const createSearchResource =
   (filterParams: FilterParamsType) => createResource(searchInhabitants(filterParams));
 
-const Filters: React.FC<FilterProps> = ({ imgCache, inhabitantsResource, setSearchResource }) => {
+const Filters: React.FC<FilterProps> = ({ inhabitantsResource, setSearchResource }) => {
   const inhabitants = inhabitantsResource.read() as InhabitantType[];
 
   const [professionOptions, setProfessionOptions] = useState<string[]>([]);
   const [filterParams, setFilterParams] = useState<FilterParamsType>(initialFilterValues);
 
-  const updateImageCache = ({ imgCache, inhabitants }: UpdateCacheType): CacheType => {
-    let udpatedCache = { ...imgCache.current };
-
-    inhabitants.forEach(gnome => {
-      if (udpatedCache[gnome.thumbnail]) {
-        return
-      } else {
-        udpatedCache = {
-          ...udpatedCache,
-          [gnome.thumbnail]: <img className="h-12 w-12 rounded-full" src={gnome.thumbnail} alt="" />
-        }
-      }
-    });
-
-    return { ...udpatedCache }
-  }
-
   useEffect(() => {
-    imgCache.current = { ...updateImageCache({ inhabitants, imgCache }) };
     setProfessionOptions(getProfessionOptions(inhabitants));
   }, [inhabitants])
 

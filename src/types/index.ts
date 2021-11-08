@@ -26,10 +26,3 @@ export type SearchResultType = {
 export type SearchResourceType = {
   read: () => InhabitantType[] | Promise<InhabitantType[]>;
 };
-
-export type CacheType = Record<string, JSX.Element>;
-
-export type UpdateCacheType = {
-  imgCache: React.MutableRefObject<CacheType>;
-  inhabitants: InhabitantType[];
-}

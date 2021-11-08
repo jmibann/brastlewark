@@ -7,6 +7,7 @@ import Pagination from './Pagination';
 import Pill from './Pill';
 import PhisicalDescription from './PhisicalDescription';
 import ProfessionsList from './ProfessionsList'
+import { SkeletonLine, SkeletonPill } from './Skeleton';
 import Select from './Select';
 import Spinner from './Spinner';
 import Table from './Table';
@@ -21,6 +22,8 @@ export {
   PhisicalDescription,
   ProfessionsList,
   Pill,
+  SkeletonLine,
+  SkeletonPill,
   Select,
   Spinner,
   Table,
