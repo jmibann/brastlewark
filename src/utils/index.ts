@@ -1,7 +1,11 @@
+import React from 'react';
+
 import {
-  ProfessionRecordType,
+  CacheType,
   InhabitantType,
+  UpdateCacheType,
   SearchResultType,
+  ProfessionRecordType,
 } from '../types';
 
 export function createResource<T>(promise: Promise<T>): {

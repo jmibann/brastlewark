@@ -10,19 +10,26 @@ export type InhabitantType = {
   professions: string[];
 };
 
-export type ProfessionRecordType = Record<string, string>
+export type ProfessionRecordType = Record<string, string>;
 
 export type FilterParamsType = {
   age: number;
   name: string;
   profession: string;
-}
+};
 
 export type SearchResultType = {
   filterParams: FilterParamsType;
   inhabitants: InhabitantType[];
-}
+};
 
 export type SearchResourceType = {
   read: () => InhabitantType[] | Promise<InhabitantType[]>;
+};
+
+export type CacheType = Record<string, JSX.Element>;
+
+export type UpdateCacheType = {
+  imgCache: React.MutableRefObject<CacheType>;
+  inhabitants: InhabitantType[];
 }

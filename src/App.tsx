@@ -1,4 +1,4 @@
-import React, { Suspense, useState } from 'react';
+import React, { Suspense, useState, useRef } from 'react';
 
 import {
   AvatarCell,
@@ -10,7 +10,7 @@ import {
   Spinner,
 } from './components';
 
-import { SearchResourceType } from './types'
+import { SearchResourceType, CacheType } from './types'
 import { createResource } from './utils';
 import { getInhabitants } from './services';
 
@@ -21,6 +21,7 @@ const inhabitantsResource = createInhabitantsResource();
 
 function App() {
   const [searchResource, setSearchResource] = useState<SearchResourceType>(inhabitantsResource);
+  const imgCache = useRef<CacheType>({});
 
   const columns = React.useMemo(
     () => [
@@ -28,7 +29,7 @@ function App() {
         Header: () =>
           <div className="flex w-full">Name</div>,
         accessor: 'name',
-        Cell: AvatarCell,
+        Cell: (props: any) => <AvatarCell {...props} imgCache={imgCache} />,
         imgAccessor: "thumbnail",
       },
       {
@@ -64,11 +65,12 @@ function App() {
       </span>
       <Suspense fallback={<Spinner />}>
         <Filters
+          imgCache={imgCache}
           inhabitantsResource={inhabitantsResource}
           setSearchResource={setSearchResource}
         />
       </Suspense>
-
+      {console.log('=============> udpatedCache: ', imgCache)}
       <Suspense fallback={<Spinner />}>
         <Table columns={columns} searchResource={searchResource} />
       </Suspense>

@@ -13,7 +13,6 @@ type TableProps = {
 }
 
 const Table: React.FC<TableProps> = ({ columns, searchResource }) => {
-
   const data = searchResource.read() as InhabitantType[];
 
   const {
@@ -42,7 +41,11 @@ const Table: React.FC<TableProps> = ({ columns, searchResource }) => {
       <div className="w-full flex flex-col my-2 align-middle shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
         <table {...getTableProps()} className="min-w-full divide-y divide-gray-200">
           <TableHeader headerGroups={headerGroups} />
-          <TableBody page={page} getTableBodyProps={getTableBodyProps} prepareRow={prepareRow} />
+          <TableBody
+            page={page}
+            getTableBodyProps={getTableBodyProps}
+            prepareRow={prepareRow}
+          />
         </table >
       </div>
 
