@@ -93,6 +93,7 @@ function App() {
       <span className="text-3xl font-sans text-blue-700 text-opacity-90 mb-12 text-center">
         Welcome to Brastlewark Town Census Data
       </span>
+
       <Suspense fallback={<Spinner />}>
         <Filters
           inhabitantsResource={inhabitantsResource}
@@ -103,6 +104,7 @@ function App() {
 
       <Suspense fallback={
         <Table
+          ariaLabel="loading table"
           columns={LOADING_TABLE_COL}
           searchResource={{ read: () => LOADING_DATA_TABLE }}
         />}

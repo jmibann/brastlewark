@@ -10,9 +10,10 @@ import TableHeader from './TableHeader';
 type TableProps = {
   searchResource: SearchResourceType;
   columns: any;
+  ariaLabel?: string;
 }
 
-const Table: React.FC<TableProps> = ({ columns, searchResource }) => {
+const Table: React.FC<TableProps> = ({ columns, searchResource, ariaLabel }) => {
   const data = searchResource.read() as InhabitantType[];
 
   const {
@@ -38,7 +39,10 @@ const Table: React.FC<TableProps> = ({ columns, searchResource }) => {
 
   return (
     <>
-      <div className="w-full flex flex-col my-2 align-middle shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+      <div
+        aria-label={ariaLabel}
+        className="w-full flex flex-col my-2 align-middle shadow overflow-hidden border-b border-gray-200 sm:rounded-lg"
+      >
         <table {...getTableProps()} className="min-w-full divide-y divide-gray-200">
           <TableHeader headerGroups={headerGroups} />
           <TableBody
