@@ -26,3 +26,5 @@ export type SearchResultType = {
 export type SearchResourceType = {
   read: () => InhabitantType[] | Promise<InhabitantType[]>;
 };
+
+export type ImageCacheType = string[];

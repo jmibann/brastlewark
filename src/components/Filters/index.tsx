@@ -6,11 +6,18 @@ import {
   InhabitantType,
   FilterParamsType,
   SearchResourceType,
-} from '../../types'
-import { createResource, getProfessionOptions } from '../../utils';
+  ImageCacheType,
+} from '../../types';
+
+import {
+  createResource,
+  getProfessionOptionsAndImgCache,
+} from '../../utils';
+
 import { searchInhabitants } from '../../services';
 
 type FilterProps = {
+  setImageCache: React.Dispatch<React.SetStateAction<ImageCacheType>>;
   setSearchResource: React.Dispatch<SearchResourceType>;
   inhabitantsResource: {
     read: () => InhabitantType[] | Promise<InhabitantType[]>;
@@ -26,15 +33,17 @@ const initialFilterValues: FilterParamsType = {
 const createSearchResource =
   (filterParams: FilterParamsType) => createResource(searchInhabitants(filterParams));
 
-const Filters: React.FC<FilterProps> = ({ inhabitantsResource, setSearchResource }) => {
+const Filters: React.FC<FilterProps> = ({ inhabitantsResource, setSearchResource, setImageCache }) => {
   const inhabitants = inhabitantsResource.read() as InhabitantType[];
 
   const [professionOptions, setProfessionOptions] = useState<string[]>([]);
   const [filterParams, setFilterParams] = useState<FilterParamsType>(initialFilterValues);
 
   useEffect(() => {
-    setProfessionOptions(getProfessionOptions(inhabitants));
-  }, [inhabitants])
+    const { imgCache, professions } = getProfessionOptionsAndImgCache(inhabitants);
+    setImageCache(imgCache);
+    setProfessionOptions(professions);
+  }, [inhabitants, setImageCache])
 
   const { age, name, profession } = filterParams;
 

@@ -2,6 +2,7 @@ import AvatarCell from './AvatarCell';
 import Input from './Input';
 import Filters from './Filters';
 import FriendsList from './FriendsList';
+import InvisibleImages from './InvisibleImages';
 import PageButton from './PageButton';
 import Pagination from './Pagination';
 import Pill from './Pill';
@@ -17,6 +18,7 @@ export {
   Input,
   Filters,
   FriendsList,
+  InvisibleImages,
   PageButton,
   Pagination,
   PhisicalDescription,

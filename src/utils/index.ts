@@ -45,17 +45,25 @@ const getUnrecordedGnomeProfessions = (gnomeProfessions: string[], record: Profe
   return professionRecord
 };
 
-export const getProfessionOptions = (inhabitants: InhabitantType[]) => {
+export const getProfessionOptionsAndImgCache = (inhabitants: InhabitantType[]) => {
   let options = {};
+  let imgCache = {};
 
-  inhabitants?.forEach((gnome) =>
+  inhabitants?.forEach((gnome) => {
     options = {
       ...options,
       ...getUnrecordedGnomeProfessions(gnome.professions, options)
     }
+    if (!imgCache[gnome.thumbnail]) {
+      imgCache = { ...imgCache, [gnome.thumbnail]: gnome.thumbnail };
+    }
+  }
   );
 
-  return Object.keys(options).sort();
+  return {
+    professions: Object.keys(options).sort(),
+    imgCache: Object.keys(imgCache),
+  };
 };
 
 const filterByAge = (age: number, inhabitants: InhabitantType[]) =>
