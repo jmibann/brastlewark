@@ -14,7 +14,7 @@ In order to install all the dependencies for the project. Wait for it to finish,
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-Note: After pressing enter in the "Search By Name..." or "Search by Age..." inputsfields search will be perfomed.
+Note: After hitting enter key in the "Search By Name..." or "Search by Age..." inputs fields search will be performed.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
