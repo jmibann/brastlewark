@@ -1,7 +1,7 @@
 import { searchResult } from '../utils';
 import { InhabitantType, FilterParamsType } from '../types';
 
-const URL = 'https://raw.githubusercontent.com/rrafols/mobile_test/master/data.json';
+export const URL = 'https://raw.githubusercontent.com/rrafols/mobile_test/master/data.json';
 
 export const getInhabitants = (): Promise<InhabitantType[]> => {
   return window.fetch(URL)

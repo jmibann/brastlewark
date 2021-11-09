@@ -3,6 +3,7 @@ import Input from './Input';
 import Filters from './Filters';
 import FriendsList from './FriendsList';
 import InvisibleImages from './InvisibleImages';
+import NoItemFound from './NoItemFound';
 import PageButton from './PageButton';
 import Pagination from './Pagination';
 import Pill from './Pill';
@@ -19,6 +20,7 @@ export {
   Filters,
   FriendsList,
   InvisibleImages,
+  NoItemFound,
   PageButton,
   Pagination,
   PhisicalDescription,

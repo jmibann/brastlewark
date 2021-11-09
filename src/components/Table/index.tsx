@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { InhabitantType, SearchResourceType } from '../../types';
 import { useTable, usePagination } from 'react-table';
 
-import { Pagination } from '../../components';
+import { Pagination, NoItemFound } from '../../components';
 import TableBody from './TableBody';
 import TableHeader from './TableHeader';
 
@@ -15,7 +15,6 @@ type TableProps = {
 
 const Table: React.FC<TableProps> = ({ columns, searchResource, ariaLabel }) => {
   const data = searchResource.read() as InhabitantType[];
-
   const {
     getTableProps,
     getTableBodyProps,
@@ -45,11 +44,15 @@ const Table: React.FC<TableProps> = ({ columns, searchResource, ariaLabel }) => 
       >
         <table {...getTableProps()} className="min-w-full divide-y divide-gray-200">
           <TableHeader headerGroups={headerGroups} />
-          <TableBody
-            page={page}
-            getTableBodyProps={getTableBodyProps}
-            prepareRow={prepareRow}
-          />
+          {
+            data.length ?
+              <TableBody
+                page={page}
+                getTableBodyProps={getTableBodyProps}
+                prepareRow={prepareRow}
+              />
+              : <NoItemFound />
+          }
         </table >
       </div>
 

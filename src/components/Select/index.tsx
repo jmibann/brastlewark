@@ -9,6 +9,7 @@ type SelectProps = {
 const Select: React.FC<SelectProps> = ({ options, onChange, value }) => {
   return (
     <select
+      data-testid="select-option"
       placeholder="jobs"
       className="rounded px-2 py-1 border w-1/2 sm:w-1/4"
       onChange={onChange}
