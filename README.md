@@ -24,4 +24,4 @@ Run "npm test" command if you want to run test.This will launch the test runner 
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 
-**Note 2: You’ll need to have Node 14.0.0 or later version on your local development machine (but it’s not required on the server). We recommend using the latest LTS version.**
+**Note 2: You’ll need to have NPM and Node 14.0.0 or later version on your local development machine (but it’s not required on the server). We recommend using the latest LTS version.**
